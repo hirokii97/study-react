@@ -1,7 +1,4 @@
-import { getSpotifyToken } from "./lib/spotify";
-
 export default function App() {
-  getSpotifyToken();
   return (
     <div className="flex flex-col min-h-screen bg-gray-900 text-white">
       <main className="flex-1 p-8 mb-20">
