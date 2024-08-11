@@ -19,6 +19,19 @@ class SpoitifyClient {
     spotify.token = data.access_token;
     return spotify;
   }
+
+  async getPopularSong() {
+    const urlOfPopularSong =
+      "https://api.spotify.com/v1/playlists/37i9dQZF1DX9vYRBO9gjDe";
+    const response = await fetch(urlOfPopularSong, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + this.token,
+      },
+    });
+    const data = await response.json();
+    return data
+  }
 }
 
 const spotify = await SpoitifyClient.initilaize();
