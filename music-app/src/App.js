@@ -18,14 +18,12 @@ export default function App() {
     setIsloading(true);
     const result = await spotify.getPopularSong();
     const popularSongs = result.items.map((item) => item.track);
-    console.log(popularSongs);
     setSongs(popularSongs);
     setIsloading(false);
   };
 
   const handleSongSelected = (song) => {
     setSelectedSong(song)
-    console.log(song);
     audioRef.current.src = song.preview_url
     audioRef.current.play()
     setIsPlay(true)
