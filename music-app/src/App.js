@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { SongList } from "./components/songList";
 import spotify from "./lib/spotify";
+import { Player } from "./components/player";
 
 export default function App() {
   const [isLoading, setIsloading] = useState(false);
   const [songs, setSongs] = useState([]);
-  const [isPlay, setIsPlay] = useState(false)
-  const [selectedSong , setSelectedSong] = useState([])
+  const [isPlay, setIsPlay] = useState(false);
+  const [selectedSong, setSelectedSong] = useState(null);
 
   const audioRef = useRef();
 
@@ -23,10 +24,21 @@ export default function App() {
   };
 
   const handleSongSelected = (song) => {
-    setSelectedSong(song)
-    audioRef.current.src = song.preview_url
-    audioRef.current.play()
-    setIsPlay(true)
+    setSelectedSong(song);
+    audioRef.current.src = song.preview_url;
+    playSong();
+  };
+
+  const playSong = () => {
+    audioRef.current.play();
+    setIsPlay(true);
+  };
+  const pauseSong = () => {
+    audioRef.current.pause();
+    setIsPlay(false);
+  };
+  const togglePlaySong = () => {
+    isPlay ? pauseSong() : playSong();
   };
   return (
     <div className="flex flex-col min-h-screen bg-gray-900 text-white">
@@ -43,6 +55,13 @@ export default function App() {
           />
         </section>
       </main>
+      {selectedSong != null && (
+        <Player
+          isPlay={isPlay}
+          song={selectedSong}
+          togglePlaySong={togglePlaySong}
+        />
+      )}
       <audio ref={audioRef} />
     </div>
   );
