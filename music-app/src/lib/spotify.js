@@ -33,6 +33,18 @@ class SpoitifyClient {
 
     return data.tracks;
   }
+
+  async searchSongs(keyword) {
+      const urlOfSearchSong = `https://api.spotify.com/v1/search?q=${keyword}&type=track`;
+      const response = await fetch(urlOfSearchSong, {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + this.token,
+        },
+      });
+      const data = await response.json();
+      return data.tracks.items;
+    }
 }
 
 const spotify = await SpoitifyClient.initilaize();
