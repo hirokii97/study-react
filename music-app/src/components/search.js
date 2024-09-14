@@ -1,8 +1,12 @@
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function SearchInput(props) {
+  const { page, fetchSearchSongs } = props;
+  useEffect(() => {
+    fetchSearchSongs(searchWord, page);
+  }, [page]);
   const [searchWord, setSearchWord] = useState("");
 
   return (
@@ -14,7 +18,7 @@ export function SearchInput(props) {
         onChange={(e) => setSearchWord(e.target.value)}
       />
       <button
-        onClick={() => props.fetchSearchSongs(searchWord)}
+        onClick={() => fetchSearchSongs(searchWord, page)}
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r-lg"
       >
         <FontAwesomeIcon icon={faSearch} />

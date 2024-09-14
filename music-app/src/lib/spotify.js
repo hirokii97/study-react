@@ -34,8 +34,8 @@ class SpoitifyClient {
     return data.tracks;
   }
 
-  async searchSongs(keyword) {
-      const urlOfSearchSong = `https://api.spotify.com/v1/search?q=${keyword}&type=track`;
+  async searchSongs(keyword, limit, offset) {    
+      const urlOfSearchSong = `https://api.spotify.com/v1/search?q=${keyword}&type=track&limit=${limit}&offset=${offset}`;
       const response = await fetch(urlOfSearchSong, {
         method: "GET",
         headers: {
