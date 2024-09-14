@@ -9,6 +9,7 @@ export default function App() {
   const [songs, setSongs] = useState([]);
   const [isPlay, setIsPlay] = useState(false);
   const [selectedSong, setSelectedSong] = useState(null);
+  const [isSearched, setIsSearched] = useState(false) 
 
   const audioRef = useRef();
 
@@ -28,10 +29,12 @@ export default function App() {
     setIsloading(true);
     if (keyword === "") {
       fetchPopularSong();
+      setIsSearched(false)
       return;
     } else {
       const result = await spotify.searchSongs(keyword);
       setSongs(result);
+      setIsSearched(true)
     }
     setIsloading(false);
   };
@@ -64,7 +67,7 @@ export default function App() {
         </header>
         <SearchInput fetchSearchSongs={fetchSearchSongs} />
         <section>
-          <h2 className="text-2xl font-semibold mb-5">Popular Songs</h2>
+          <h2 className="text-2xl font-semibold mb-5">{isSearched ? "Searched Songs" : "Popular Songs"}</h2>
           <SongList
             songs={songs}
             isLoading={isLoading}
