@@ -6,6 +6,7 @@ export function SearchInput(props) {
   const { page, fetchSearchSongs } = props;
   useEffect(() => {
     fetchSearchSongs(searchWord, page);
+    // eslint-disable-next-line
   }, [page]);
   const [searchWord, setSearchWord] = useState("");
 
