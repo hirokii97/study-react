@@ -1,6 +1,7 @@
 {
   "name": "music-app",
   "version": "0.1.0",
+  "homepage": "https://hirokii97.github.io/study-react/",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
